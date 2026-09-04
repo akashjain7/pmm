@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orthians: Positioning a Challenger Brand · Akash Jain</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #1a1612; --ink2: #5c5449; --ink3: #9e9488;
+      --cream: #f7f3ee; --cream2: #ede8e0; --cream3: #e2dbd0;
+      --gold: #b8924a; --gold-light: #f0e2c8; --red: #c0392b; --green: #2d6a4f;
+      --radius: 6px; --radius-lg: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 15px; line-height: 1.7; }
+    .hero { background: var(--ink); color: var(--cream); padding: 64px 40px 56px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 320px; height: 320px; border-radius: 50%; border: 1px solid rgba(184,146,74,0.2); }
+    .hero::after { content: ''; position: absolute; bottom: -40px; left: 40px; width: 180px; height: 180px; border-radius: 50%; border: 1px solid rgba(184,146,74,0.12); }
+    .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,146,74,0.4); padding: 4px 12px; border-radius: 20px; margin-bottom: 24px; }
+    .hero-title { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 5vw, 52px); line-height: 1.1; color: var(--cream); margin-bottom: 16px; }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub { font-size: 16px; color: rgba(247,243,238,0.65); max-width: 620px; margin-bottom: 32px; font-weight: 300; }
+    .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-pill { font-size: 12px; padding: 4px 12px; background: rgba(247,243,238,0.08); border: 1px solid rgba(247,243,238,0.15); border-radius: 20px; color: rgba(247,243,238,0.7); }
+    .sticky-nav { position: sticky; top: 0; z-index: 100; background: var(--cream); border-bottom: 1px solid var(--cream3); padding: 0 40px; }
+    .nav-inner { max-width: 860px; margin: 0 auto; display: flex; gap: 0; overflow-x: auto; }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-btn { padding: 14px 18px; font-size: 13px; font-weight: 400; border: none; background: transparent; color: var(--ink3); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all .15s; font-family: 'DM Sans', sans-serif; }
+    .nav-btn:hover { color: var(--ink); }
+    .nav-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+    .nav-btn.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 500; }
+    .main { max-width: 860px; margin: 0 auto; padding: 48px 40px 80px; }
+    @media (max-width: 600px) { .hero { padding: 40px 20px; } .sticky-nav { padding: 0 20px; } .main { padding: 32px 20px 60px; } }
+    .section { display: none; animation: fadeIn .2s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { .section { animation: none; } }
+    .section-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .section-heading { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--ink); margin-bottom: 24px; line-height: 1.2; }
+    .prose { font-size: 15px; color: var(--ink2); line-height: 1.8; margin-bottom: 20px; }
+    .prose strong { color: var(--ink); font-weight: 500; }
+    .divider { height: 1px; background: var(--cream3); margin: 32px 0; }
+    .callout { background: var(--gold-light); border-left: 3px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 20px; margin-bottom: 24px; font-size: 14px; color: var(--ink); line-height: 1.7; }
+    .callout strong { font-weight: 500; }
+    .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+    @media (max-width: 560px) { .kpi-row { grid-template-columns: 1fr; } }
+    .kpi { background: var(--cream2); border-radius: var(--radius-lg); padding: 18px 16px; border: 1px solid var(--cream3); }
+    .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink3); margin-bottom: 6px; }
+    .kpi-val { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+    .kpi-val.good { color: var(--green); }
+    .kpi-sub { font-size: 11px; color: var(--ink3); }
+    .learning { border-left: 3px solid var(--cream3); padding: 4px 0 4px 20px; margin-bottom: 24px; transition: border-color .2s; }
+    .learning:hover { border-left-color: var(--gold); }
+    .learning-q { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+    .learning-a { font-size: 13px; color: var(--ink2); line-height: 1.7; }
+    .metric-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; }
+    .metric-table th { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink3); padding: 8px 12px; border-bottom: 1px solid var(--cream3); text-align: left; background: var(--cream2); }
+    .metric-table td { padding: 10px 12px; border-bottom: 1px solid var(--cream3); color: var(--ink2); }
+    .metric-table tr:last-child td { border-bottom: none; }
+    .metric-table td strong { color: var(--ink); font-weight: 500; }
+    .comp-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; }
+    .comp-table th { padding: 10px 14px; background: var(--ink); color: var(--cream); font-weight: 500; font-size: 12px; text-align: left; }
+    .comp-table th:first-child { border-radius: var(--radius) 0 0 0; }
+    .comp-table th:last-child { border-radius: 0 var(--radius) 0 0; }
+    .comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--cream3); color: var(--ink2); vertical-align: top; }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table .orth { color: var(--green); font-weight: 500; }
+    .comp-table .neutral { color: var(--ink3); }
+
+    /* Persona */
+    .persona { background: var(--cream2); border: 1px solid var(--cream3); border-radius: var(--radius-lg); padding: 22px 24px; margin: 8px 0 24px; }
+    .persona-row { display: flex; gap: 16px; margin-bottom: 14px; }
+    .persona-row:last-child { margin-bottom: 0; }
+    .persona-k { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); width: 118px; flex: none; padding-top: 2px; font-weight: 500; }
+    .persona-v { font-size: 14px; color: var(--ink2); line-height: 1.65; }
+    .persona-v strong { color: var(--ink); font-weight: 500; }
+    /* JTBD chips */
+    .jtbd { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 4px 0 26px; }
+    @media (max-width: 560px) { .jtbd { grid-template-columns: 1fr; } }
+    .jtbd-card { background: #fff; border: 1px solid var(--cream3); border-radius: var(--radius); padding: 16px; }
+    .jtbd-tag { font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .jtbd-card p { font-size: 13px; color: var(--ink2); line-height: 1.6; }
+
+    /* Positioning statement */
+    .pos-statement { background: #fff; border: 1px solid var(--cream3); border-left: 3px solid var(--gold); border-radius: var(--radius-lg); padding: 26px 28px; margin: 8px 0 28px; }
+    .pos-eyebrow { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
+    .pos-body { font-family: 'DM Serif Display', serif; font-size: 19px; line-height: 1.6; color: var(--ink); }
+    .pos-body span { color: var(--gold); }
+
+    /* Messaging house */
+    .mh { margin: 8px 0 12px; }
+    .mh-peak { width: 0; height: 0; border-left: 18px solid transparent; border-right: 18px solid transparent; border-bottom: 15px solid var(--ink); margin: 0 auto -1px; }
+    .mh-roof { background: var(--ink); color: var(--cream); border-radius: var(--radius-lg); padding: 18px 22px; text-align: center; margin-bottom: 12px; }
+    .mh-roof .lbl { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .mh-roof .msg { font-family: 'DM Serif Display', serif; font-size: 22px; color: #fff; line-height: 1.2; }
+    .mh-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 560px) { .mh-pillars { grid-template-columns: 1fr; } }
+    .mh-pillar { background: #fff; border: 1px solid var(--cream3); border-top: 3px solid var(--gold); border-radius: var(--radius); padding: 16px; }
+    .mh-pillar h4 { font-size: 13.5px; color: var(--ink); margin-bottom: 8px; font-weight: 500; }
+    .mh-pillar p { font-size: 12.5px; color: var(--ink2); line-height: 1.6; }
+    .mh-base { background: var(--cream2); border: 1px solid var(--cream3); border-radius: var(--radius); padding: 12px 16px; margin-top: 12px; text-align: center; font-size: 12.5px; color: var(--ink2); }
+    .mh-base strong { color: var(--ink); font-weight: 500; }
+    .mh-caption { font-size: 12px; color: var(--ink3); font-style: italic; margin: 6px 0 28px; }
+
+    /* Value-curve timeline */
+    .timeline-card { background: white; border: 1px solid var(--cream3); border-radius: var(--radius-lg); padding: 24px 24px 18px; margin: 8px 0 28px; }
+    .timeline-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+    .timeline-sub { font-size: 12px; color: var(--ink3); margin-bottom: 36px; }
+    .track { position: relative; height: 8px; background: var(--cream2); border-radius: 4px; margin: 0 6px 52px; }
+    .value-band { position: absolute; left: 66.6%; width: 16.8%; top: 0; bottom: 0; background: var(--gold); border-radius: 4px; }
+    .marker { position: absolute; top: -7px; width: 2px; height: 22px; }
+    .marker.m7 { left: 23.3%; background: var(--red); }
+    .marker.m30 { left: calc(100% - 2px); background: var(--green); }
+    .t-label { position: absolute; font-size: 10.5px; line-height: 1.35; color: var(--ink2); white-space: nowrap; }
+    .t-label strong { display: block; font-weight: 500; color: var(--ink); font-size: 11px; }
+    .t-label.above { bottom: 18px; transform: translateX(-50%); text-align: center; }
+    .t-label.below { top: 16px; transform: translateX(-50%); text-align: center; }
+    .t-label.l0 { left: 0; transform: none; text-align: left; }
+    .t-label.l7 { left: 23.3%; }
+    .t-label.l7 strong { color: var(--red); }
+    .t-label.lval { left: 75%; }
+    .t-label.lval strong { color: var(--gold); }
+    .t-label.l30 { left: 100%; transform: translateX(-100%); text-align: right; }
+    .t-label.l30 strong { color: var(--green); }
+    .timeline-caption { font-size: 12px; color: var(--ink3); font-style: italic; border-top: 1px solid var(--cream3); padding-top: 12px; }
+    @media (max-width: 560px) {
+      .t-label { font-size: 9px; }
+      .t-label strong { font-size: 9.5px; }
+      .track { margin-bottom: 56px; }
+    }
+    /* Results */
+    .result-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+    @media (max-width: 640px) { .result-row { grid-template-columns: 1fr; } }
+    .result { background: white; border: 1px solid var(--cream3); border-radius: var(--radius-lg); padding: 22px 20px; }
+    .result-val { font-family: 'DM Serif Display', serif; font-size: 34px; line-height: 1; margin-bottom: 4px; color: var(--green); }
+    .result-val.gold { color: var(--gold); }
+    .result-metric { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink3); margin-bottom: 12px; }
+    .result-note { font-size: 12.5px; color: var(--ink2); line-height: 1.65; }
+    .back-link { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--gold); text-decoration: none; margin-bottom: 28px; }
+    .back-link:hover { text-decoration: underline; }
+    .page-footer { text-align: center; padding: 40px 20px; font-size: 12px; color: var(--ink3); border-top: 1px solid var(--cream3); }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">PMM Portfolio · Project 01</div>
+    <h1 class="hero-title">Orthians:<br/><em>positioning a challenger</em></h1>
+    <p class="hero-sub">I co-founded a D2C ergonomics brand and owned go-to-market from zero — the buyer, the position, the message, and the channel. The product beat the market, but ratings and returns, not quality, gated growth. Repositioning around trust restarted acquisition.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">ICP &amp; Buyer Research</span>
+      <span class="hero-pill">Positioning &amp; Messaging</span>
+      <span class="hero-pill">Pricing · GTM</span>
+      <span class="hero-pill">Trust-Led Growth Turnaround</span>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="show('overview',this)">Overview</button>
+    <button class="nav-btn" onclick="show('buyer',this)">The Buyer</button>
+    <button class="nav-btn" onclick="show('positioning',this)">Positioning &amp; Messaging</button>
+    <button class="nav-btn" onclick="show('gtm',this)">Go-to-Market</button>
+    <button class="nav-btn" onclick="show('wall',this)">The Trust Wall</button>
+    <button class="nav-btn" onclick="show('results',this)">Reposition &amp; Results</button>
+    <button class="nav-btn" onclick="show('learnings',this)">Learnings</button>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- OVERVIEW -->
+  <div class="section active" id="s-overview">
+    <a href="index.html" class="back-link">← All projects</a>
+    <div class="section-eyebrow">PMM Context</div>
+    <h2 class="section-heading">The full arc: position, launch, stall, reposition</h2>
+    <p class="prose">Orthians Polycraft is a D2C memory-foam ergonomics brand I co-founded. I owned go-to-market from day zero — buyer research, competitive positioning, messaging, pricing, and channel strategy. In-house manufacturing was the structural advantage that made the whole position possible.</p>
+    <p class="prose">The category had players, but the field split in two: cheap-and-flimsy, or expensive-and-medical. Nobody was competing on genuine quality at the mainstream price. Our thesis: enter at the market leader's exact price point with a demonstrably better product, funded by manufacturing cost savings the competition didn't have.</p>
+    <div class="callout">
+      <strong>Positioning thesis — better product, same price.</strong> Higher foam density and better fabric at the leader's price point. The savings from in-house manufacturing went into the product, not the margin. Price <em>was</em> the positioning: parity on cost, superiority on quality.
+    </div>
+    <p class="prose">This case study has two chapters. <strong>Chapter one:</strong> the buyer, positioning, messaging, and go-to-market that took Orthians from idea to launch. <strong>Chapter two:</strong> what happened when ratings and returns — not the product — capped acquisition, and the repositioning around trust that restarted growth. Chapter two is where I learned the most.</p>
+    <div class="kpi-row">
+      <div class="kpi"><div class="kpi-label">Turnaround · Returns</div><div class="kpi-val good">−27%</div><div class="kpi-sub">Return rate after repositioning</div></div>
+      <div class="kpi"><div class="kpi-label">Turnaround · Rating</div><div class="kpi-val good">3.9★</div><div class="kpi-sub">Climbing toward the 4.0 trust threshold</div></div>
+      <div class="kpi"><div class="kpi-label">Turnaround · Acquisition</div><div class="kpi-val good">+5%</div><div class="kpi-sub">New purchases — growth restarted</div></div>
+    </div>
+  </div>
+
+  <!-- THE BUYER -->
+  <div class="section" id="s-buyer">
+    <div class="section-eyebrow">Chapter one · the buyer</div>
+    <h2 class="section-heading">Who we were selling to</h2>
+    <p class="prose">Everything downstream — the position, the message, the price, the channel — had to answer one specific buyer. I built the profile from 15+ interviews across returners, keepers, and long-term users, plus review mining on our listings and competitors'.</p>
+
+    <div class="persona">
+      <div class="persona-row"><div class="persona-k">Who</div><div class="persona-v"><strong>Tier-1 urban professionals, 20–35.</strong> Desk workers and long commuters with rising disposable income and growing back and neck pain from long hours sitting.</div></div>
+      <div class="persona-row"><div class="persona-k">How they buy</div><div class="persona-v">Shop online, read reviews before committing, willing to pay for quality — but skeptical, because they've bought foam that flattened in months before.</div></div>
+      <div class="persona-row"><div class="persona-k">Evaluates on</div><div class="persona-v">Proof it lasts · ratings and reviews · a way not to get burned (returns, warranty) · whether it looks worth the price.</div></div>
+    </div>
+
+    <div class="section-eyebrow">Jobs to be done</div>
+    <div class="jtbd">
+      <div class="jtbd-card"><div class="jtbd-tag">Functional</div><p>End the back and neck pain from long hours at a desk or in the car — with something that keeps working, not another pillow I replace in three months.</p></div>
+      <div class="jtbd-card"><div class="jtbd-tag">Emotional</div><p>Feel sure I'm not throwing ₹2,000 at a gimmick that lets me down.</p></div>
+      <div class="jtbd-card"><div class="jtbd-tag">Social / identity</div><p>Own something that looks premium on my desk — not a clinical medical device.</p></div>
+    </div>
+
+    <div class="section-eyebrow">The objections blocking the sale</div>
+    <p class="prose">Four doubts came up again and again. Naming them is the job — because the position and the message exist to answer them, and chapter two is what happened when one went unanswered.</p>
+    <table class="metric-table">
+      <thead><tr><th>#</th><th>The objection in the buyer's words</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>"It'll flatten in a few months like every other foam I've tried." <em>(durability doubt)</em></td></tr>
+        <tr><td>2</td><td>"Why ₹2,000 when there are ₹800 options?" <em>(price vs value)</em></td></tr>
+        <tr><td>3</td><td>"What if it doesn't work for my body?" <em>(purchase risk)</em></td></tr>
+        <tr><td>4</td><td>"It looks medical — not something I want on show." <em>(perception)</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- POSITIONING & MESSAGING -->
+  <div class="section" id="s-positioning">
+    <div class="section-eyebrow">Chapter one · positioning &amp; messaging</div>
+    <h2 class="section-heading">The position, and the message that carried it</h2>
+
+    <div class="pos-statement">
+      <div class="pos-eyebrow">Positioning statement</div>
+      <p class="pos-body">For <span>desk-bound urban professionals burned by ergonomic products that flatten in months</span>, Orthians is the <span>memory-foam ergonomics brand</span> that delivers <span>durable, genuine pain relief at the mainstream price</span> — unlike <span>budget brands that cut corners or medical brands that overcharge</span> — because <span>in-house manufacturing lets us put better materials into the product, not into margin</span>.</p>
+    </div>
+
+    <div class="section-eyebrow">Competitive positioning map</div>
+    <table class="comp-table">
+      <thead><tr><th>Brand</th><th>Manufacturing</th><th>Price range</th><th>Positioning</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Orthians</strong></td><td class="orth">In-house ✓</td><td class="orth">₹1,500–₹4,000</td><td class="orth">Best quality at market price</td></tr>
+        <tr><td>Market Leader</td><td class="neutral">Outsourced</td><td>₹1,500–₹4,000</td><td>Trust + distribution moat</td></tr>
+        <tr><td>Value Player</td><td class="neutral">Outsourced</td><td>₹800–₹2,500</td><td>Budget segment, price-first</td></tr>
+        <tr><td>Medical Brand</td><td class="neutral">Outsourced</td><td>₹1,200–₹3,500</td><td>Medical credibility angle</td></tr>
+      </tbody>
+    </table>
+    <p class="prose">The map shows the white space: everyone else was either priced-down on quality or leaning clinical. <strong>"Best quality at the mainstream price"</strong> was an unoccupied position — and in-house manufacturing was the only way to hold it profitably.</p>
+
+    <div class="divider"></div>
+    <div class="section-eyebrow">Messaging house</div>
+    <div class="mh">
+      <div class="mh-peak"></div>
+      <div class="mh-roof">
+        <div class="lbl">Core message</div>
+        <div class="msg">Better foam, same price — built to last.</div>
+      </div>
+      <div class="mh-pillars">
+        <div class="mh-pillar"><h4>Built to last</h4><p>8–9 months of verified shape retention vs the category's 3–4 — backed by a 1-year warranty.</p></div>
+        <div class="mh-pillar"><h4>Better product, same price</h4><p>Higher foam density and better fabric across the ₹1,500–4,000 range. Manufacturing funds quality, not margin.</p></div>
+        <div class="mh-pillar"><h4>Risk-free to feel it work</h4><p>A 30-day window timed to when relief actually shows (day 20–25), plus 30-day replacement.</p></div>
+      </div>
+      <div class="mh-base"><strong>Foundation (reasons to believe):</strong> in-house manufacturing, and durability verified by real long-term users — not a spec sheet.</div>
+    </div>
+    <p class="mh-caption">Roof = the one line the brand leads with. Pillars = the three proof themes beneath it. Foundation = the evidence that makes them credible.</p>
+
+    <div class="section-eyebrow">Claims → objection-handling</div>
+    <p class="prose">Each pillar exists to disarm one of the buyer's four objections. This is the message doing its actual job:</p>
+    <table class="metric-table">
+      <thead><tr><th>Buyer's objection</th><th>The claim &amp; proof that answers it</th></tr></thead>
+      <tbody>
+        <tr><td>"It'll flatten in months"</td><td><strong>8–9 months verified retention</strong>, underwritten by a 1-year warranty foam rivals can't safely match.</td></tr>
+        <tr><td>"Not worth ₹2,000"</td><td><strong>Same price as the market leader</strong>, visibly better specs — quality funded by in-house manufacturing, not markup.</td></tr>
+        <tr><td>"What if it doesn't work for me?"</td><td><strong>30-day return timed to when relief shows</strong>, plus 30-day replacement — judge it after you feel it.</td></tr>
+        <tr><td>"It looks clinical"</td><td><strong>Premium fabric and finish</strong>, presented as a desk-and-home object, not a medical device.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GO-TO-MARKET -->
+  <div class="section" id="s-gtm">
+    <div class="section-eyebrow">Chapter one · go-to-market</div>
+    <h2 class="section-heading">Pricing and channel to reach the buyer</h2>
+    <p class="prose">With the buyer and the position set, two calls decided how the message reached the market — and one of them planted the problem chapter two had to solve.</p>
+
+    <div class="learning">
+      <div class="learning-q">Pricing as positioning</div>
+      <div class="learning-a">In-house manufacturing kept COGS near ₹550 on a ₹2,000 SKU — roughly 60% gross margin against an industry average of 35–40%. That headroom was the engine: it funded the trust-building a challenger needs without going underwater. Price wasn't a markup on cost — it was a signal: parity with the leader on price, superiority on product. The tradeoff: in-house meant heavier fixed costs and capital tied up in capability instead of inventory.</div>
+    </div>
+
+    <div class="learning">
+      <div class="learning-q">Channel: where the buyer already shops</div>
+      <div class="learning-a">Amazon and Flipkart first, where category buyers search and where reviews compound into trust. Our own site as the margin driver once trust was established. No offline retail: lower fixed cost, faster feedback loops, and the category already had proven online purchase behaviour. The tradeoff: marketplace dependence made ratings and reviews our top-of-funnel — and that dependence is exactly where chapter two begins.</div>
+    </div>
+
+    <div class="callout">
+      <strong>The seed of the problem:</strong> choosing marketplaces meant a marketing signal we didn't fully control — the star rating — became the gate on every new sale. Great when it works for you. In chapter two, it worked against us.
+    </div>
+  </div>
+
+  <!-- THE TRUST WALL -->
+  <div class="section" id="s-wall">
+    <div class="section-eyebrow">Chapter two · the trust wall</div>
+    <h2 class="section-heading">When trust signals capped growth</h2>
+    <p class="prose">Months into launch, the model started leaking. <strong>Returns were high. Average ratings sat below 4.0. Retention was weak.</strong> And new purchases flattened — because the GTM bet had made marketplace trust signals our front door. A sub-4.0 rating suppresses conversion and organic rank, and every return burns reverse-logistics cost and usually leaves a bad review behind.</p>
+    <p class="prose">The uncomfortable part: the product tested well in hand. So this wasn't a product problem — it was a <strong>positioning and expectations problem</strong>. What buyers expected at the point of purchase wasn't aligned with how, and when, the product actually delivered its value.</p>
+    <div class="callout">
+      <strong>Problem statement:</strong> high returns and weak retention were dragging average ratings below 4.0, which capped new-user acquisition. Diagnose why buyers were rejecting a product that beat the market — and fix it without changing the price or the product line.
+    </div>
+    <div class="callout" style="border-left-color: var(--ink3); background: var(--cream2);">
+      <strong>Why returns hurt twice:</strong> the 60% gross margin from chapter one was the plan's engine. Every avoidable return handed that margin to reverse logistics, and often traded it for a one-star review on top — hitting both the P&amp;L and the top of the funnel at once.
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-eyebrow">Diagnosis · what the buyer research surfaced</div>
+    <p class="prose">The same 15+ interviews and review mining that built the buyer profile now explained the leak. Sampling skewed toward reachable users, so I treated the findings as directional — but the pattern was consistent enough to bet on.</p>
+
+    <div class="learning">
+      <div class="learning-q">Insight 1 — Value arrives at day 20–25. The return window closed at day 7.</div>
+      <div class="learning-a">Users who stayed consistent for 20–25 days reported real pain reduction. But the 7-day return window forced a keep-or-return verdict in week one, before the product had any chance to prove itself. Buyers were returning defensively — "while I still can." The purchase experience had set the wrong timeline; the deadline was manufacturing returns, not the product. <strong>This was objection #3 going unanswered.</strong></div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">Insight 2 — At ₹2,000, the unboxing is part of the pitch</div>
+      <div class="learning-a">Buyers spending ₹2,000 expected the object itself to feel worth it. Ergonomic products look unfamiliar, and when the first impression read "medical" instead of "premium," doubt set in before the foam got a chance. Perceived quality is a marketing surface — and ours was quietly underselling a product that deserved better. <strong>Objection #4, live in the box.</strong></div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">Insight 3 — Durability was our strongest unclaimed asset</div>
+      <div class="learning-a">Market-standard foam loses shape in 3–4 months. Long-term users confirmed ours held for 8–9 months — a verified outcome from real usage, not a spec sheet, with headroom to push further. We had a genuine advantage buyers couldn't see at purchase, and we were claiming it nowhere. An unmade claim is a wasted one — and the answer to objection #1.</div>
+    </div>
+  </div>
+
+  <!-- REPOSITION & RESULTS -->
+  <div class="section" id="s-results">
+    <div class="section-eyebrow">Chapter two · the repositioning</div>
+    <h2 class="section-heading">Three trust bets, and what moved</h2>
+    <p class="prose">The fix wasn't a new product — it was aligning the promise, the claims, and the buying experience with how the product actually delivered value. Three bets, each closing one of the open objections.</p>
+    <div class="callout">
+      <strong>The counterintuitive bet:</strong> extending the return window 4× would <em>reduce</em> returns, not increase them. If value lands at day 20–25, a 7-day deadline guarantees defensive exits. Give the product time to prove itself and those exits disappear. The risk was real — more time could mean more returns if the read was wrong — so return rate became the guardrail metric, watched weekly.
+    </div>
+
+    <div class="timeline-card">
+      <div class="timeline-title">The value curve vs the decision deadline</div>
+      <div class="timeline-sub">Days since purchase</div>
+      <div class="track">
+        <div class="value-band"></div>
+        <div class="marker m7"></div>
+        <div class="marker m30"></div>
+        <span class="t-label above l7"><strong>Day 7</strong>old window ends</span>
+        <span class="t-label above l30"><strong>Day 30</strong>new window ends</span>
+        <span class="t-label below l0"><strong>Day 0</strong>purchase</span>
+        <span class="t-label below lval"><strong>Day 20–25</strong>value felt</span>
+      </div>
+      <div class="timeline-caption">The old policy asked buyers for a verdict two weeks before the product could deliver one.</div>
+    </div>
+
+    <div class="learning">
+      <div class="learning-q">Bet 1 — Return window 7 → 30 days (answers "what if it doesn't work for me?")</div>
+      <div class="learning-a">Aligned the buying experience to the value curve. Buyers now judge the product after feeling the benefit, not before. This was an expectation-setting decision about when users experience value — not a CX generosity gesture.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">Bet 2 — 1-year warranty (answers "it'll flatten in months")</div>
+      <div class="learning-a">8–9 months of verified shape retention gave us the data confidence to underwrite 12 months — and it planted a claim competitors working with 3–4 month foam could not safely match. The product's real edge, finally made legible to the buyer at the point of purchase.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">Bet 3 — 30-day replacement (answers "it looks clinical / arrived wrong")</div>
+      <div class="learning-a">A damaged or underwhelming first impression now had an instant resolution path that kept the user in the product instead of exiting to a refund. Replacements preserve the relationship; refunds end it — and this de-risked the first-impression problem directly.</div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-eyebrow">Outcomes</div>
+    <div class="result-row">
+      <div class="result">
+        <div class="result-val">−27%</div>
+        <div class="result-metric">Return rate</div>
+        <div class="result-note">The guardrail held. A 4× longer window produced fewer exits, not more. Once the deadline pressure was gone, the defensive week-one return pattern collapsed — and the margin came back with it.</div>
+      </div>
+      <div class="result">
+        <div class="result-val gold">3.9★</div>
+        <div class="result-metric">Average rating</div>
+        <div class="result-note">Reviews written after day 25 read differently than reviews written on day 4. Honest read: 3.9 is progress, not the destination. 4.2+ is where the marketplace flywheel really compounds.</div>
+      </div>
+      <div class="result">
+        <div class="result-val">+5%</div>
+        <div class="result-metric">New purchases</div>
+        <div class="result-note">The first flywheel signal. Better ratings lift conversion, conversion lifts rank, and rank brings the next buyer in cheaper. Acquisition restarted without extra ad spend.</div>
+      </div>
+    </div>
+
+    <div class="section-eyebrow">Guardrails I watched</div>
+    <div class="learning">
+      <div class="learning-q">Return rate under the longer window</div>
+      <div class="learning-a">The core risk of the bet. If returns had risen instead of fallen, the 30-day window would have been rolled back. Reviewed weekly.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">Warranty claim rate vs margin</div>
+      <div class="learning-a">A 1-year promise carries cost exposure. Claims had to stay small enough that the trust upside outweighed the replacement cost — which the 8–9 month durability data supported.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">Rating trajectory, not just level</div>
+      <div class="learning-a">Direction mattered more than the snapshot. A rating climbing toward 4.0 with growing review volume is a recovering brand. A flat 3.9 would have meant the fix wasn't compounding.</div>
+    </div>
+  </div>
+
+  <!-- LEARNINGS -->
+  <div class="section" id="s-learnings">
+    <div class="section-eyebrow">Reflection</div>
+    <h2 class="section-heading">What this taught me</h2>
+    <p class="prose">Two chapters, two sets of lessons — most of them about marketing, not manufacturing.</p>
+
+    <div class="section-eyebrow">From the positioning</div>
+    <div class="learning">
+      <div class="learning-q">Your GTM choice picks your master metric</div>
+      <div class="learning-a">Choosing marketplaces made ratings our oxygen — a marketing signal that gates conversion and rank. I'd make the same call again, but I'd instrument trust metrics from day one instead of discovering their weight after launch.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">Pricing is a positioning decision, not a cost calculation</div>
+      <div class="learning-a">The 60% margin wasn't just profit headroom. It was what let us match the leader's price, fund trust-building, and later underwrite a 1-year warranty. Pricing, manufacturing, and messaging were one decision wearing three hats.</div>
+    </div>
+
+    <div class="section-eyebrow" style="margin-top: 8px;">From the turnaround</div>
+    <div class="learning">
+      <div class="learning-q">Returns and ratings are marketing problems as often as product ones</div>
+      <div class="learning-a">The foam already beat the market. What was broken was the gap between the expectations we set at purchase and when value actually landed. Fixing the promise and the message — not the product — restarted growth.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">A claim you can defend beats a feature you can't communicate</div>
+      <div class="learning-a">Durability stayed invisible until the warranty turned it into a claim rivals couldn't safely match. Positioning is the work of making your real advantage legible to the buyer at the moment of decision.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">Trust metrics are top-of-funnel metrics</div>
+      <div class="learning-a">On marketplaces, the rating gates conversion and organic rank. Moving it toward 4.0 restarted new-purchase growth without a rupee of extra ad spend.</div>
+    </div>
+
+    <div class="section-eyebrow" style="margin-top: 8px;">Looking forward</div>
+    <div class="learning">
+      <div class="learning-q">What I'd do differently</div>
+      <div class="learning-a">Compress the path to first paying users. Twenty manual sales over WhatsApp and Instagram DMs before full listings would have surfaced the day-20–25 value curve before launch instead of after it — so the 30-day window and the durability claim could have been the launch positioning, not the fix.</div>
+    </div>
+    <div class="learning">
+      <div class="learning-q">What I'd do next</div>
+      <div class="learning-a">Shift review requests from the standard day 3–5 to day 25+, after value lands, so reviews capture the real experience. Add day 7, 14, and 21 check-ins to keep users consistent through the value curve. And push foam R&D past 12 months of shape retention to widen the durability moat — then let the warranty claim follow it.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  Built by Akash Jain · PMM Portfolio Project 01 · Orthians Polycraft
+</div>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('s-' + id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.sticky-nav').offsetTop - 1, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

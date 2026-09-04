@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>India's Investing Apps — A Positioning Teardown · Akash Jain</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --bg:#f6f9fb; --surface:#ffffff; --surface2:#eef3f8; --ink:#0f1b2d; --ink2:#566579; --ink3:#8695a8; --line:#e7eef4;
+      --green:#06b48a; --green-d:#04916e; --green-soft:#e6f7f1;
+      --red:#ef5350; --red-soft:#fdeceb;
+      --grw:#00bd8f; --zer:#3b82f6; --ang:#f59e0b; --ind:#7c6cf6;
+      --sans:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+      --r:14px; --r-lg:20px;
+      --sh:0 1px 3px rgba(15,27,45,.04),0 10px 30px rgba(15,27,45,.05);
+      --sh-hover:0 8px 20px rgba(15,27,45,.06),0 20px 48px rgba(15,27,45,.10);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+    .num{font-variant-numeric:tabular-nums}
+    .wrap{max-width:940px;margin:0 auto;padding:0 32px}
+    @media(max-width:600px){.wrap{padding:0 20px}}
+    h1,h2,h3,h4{letter-spacing:-.02em}
+    section{padding:70px 0;scroll-margin-top:66px}
+    section+section{border-top:1px solid var(--line)}
+    .kicker{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--green);margin-bottom:16px}
+    .kicker .n{width:22px;height:22px;border-radius:7px;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;font-size:11px}
+    h2.sh{font-size:clamp(24px,3.6vw,34px);font-weight:800;color:var(--ink);margin-bottom:18px;line-height:1.12}
+    p.body{color:var(--ink2);font-size:15.5px;margin-bottom:18px;max-width:70ch}
+    p.body b{color:var(--ink);font-weight:600}
+    .accent{color:var(--green-d);font-weight:600} .neg{color:var(--red);font-weight:600}
+
+    /* nav */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(246,249,251,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav-in{max-width:940px;margin:0 auto;padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:15px;color:var(--ink)}
+    .brand .logo{width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,var(--green),#38d6a6);box-shadow:0 2px 8px rgba(6,180,138,.4)}
+    .nav-links{display:flex;gap:2px;overflow-x:auto}
+    .nav-links::-webkit-scrollbar{display:none}
+    .nav-links a{font-size:13px;font-weight:500;color:var(--ink3);text-decoration:none;padding:7px 12px;border-radius:8px;white-space:nowrap;transition:.15s}
+    .nav-links a:hover{color:var(--ink)}
+    .nav-links a.on{color:var(--green-d);background:var(--green-soft)}
+    @media(max-width:760px){.nav-links{display:none}}
+
+    /* hero */
+    .hero{position:relative;overflow:hidden}
+    .hero-chart{position:absolute;right:0;top:0;width:60%;height:100%;opacity:.5;pointer-events:none}
+    .hero-in{position:relative;padding:78px 0 34px}
+    @media(max-width:600px){.hero-in{padding:52px 0 24px}}
+    .htag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink3);margin-bottom:22px}
+    .htag b{color:var(--green-d)}
+    h1.ht{font-size:clamp(34px,6vw,60px);font-weight:800;color:var(--ink);line-height:1.05;max-width:15ch}
+    h1.ht em{font-style:normal;color:var(--green)}
+    .hlede{font-size:18px;color:var(--ink2);max-width:56ch;margin-top:20px}
+    /* app tiles */
+    .apps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:38px}
+    @media(max-width:680px){.apps{grid-template-columns:repeat(2,1fr)}}
+    .app{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--sh)}
+    .app-ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px;margin-bottom:12px}
+    .app .an{font-weight:700;font-size:14px;color:var(--ink);display:flex;align-items:center;gap:6px}
+    .app .an .t{font-size:12px;font-weight:700}
+    .app .ap{font-size:12px;color:var(--ink3);margin-top:3px}
+    .t-up{color:var(--green)} .t-dn{color:var(--red)}
+
+    /* stat cards */
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:6px 0 26px}
+    @media(max-width:600px){.stats{grid-template-columns:1fr}}
+    .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh)}
+    .stat.warn{background:var(--red-soft);border-color:#f7c9c7}
+    .stat .l{font-size:12px;font-weight:600;color:var(--ink3);margin-bottom:14px}
+    .stat .v{font-size:40px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.03em}
+    .stat.warn .v{color:var(--red)}
+    .stat .s{font-size:12.5px;color:var(--ink2);margin-top:9px;line-height:1.5}
+    .chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin-top:10px}
+    .chip.g{background:var(--green-soft);color:var(--green-d)} .chip.r{background:#fff;color:var(--red)}
+
+    /* callout */
+    .call{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:var(--r);padding:20px 22px;margin:8px 0 22px;font-size:14.5px;color:var(--ink2);line-height:1.7;box-shadow:var(--sh)}
+    .call.pos{border-left-color:var(--green)}
+    .call b{color:var(--ink);font-weight:700}
+    .note{font-size:12.5px;color:var(--ink3);line-height:1.6;margin-top:8px}
+
+    /* table */
+    .dt{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;margin:6px 0 24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
+    .dt th{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink3);text-align:left;padding:13px 16px;background:var(--surface2)}
+    .dt td{padding:14px 16px;border-top:1px solid var(--line);color:var(--ink2);vertical-align:top}
+    .dt td:first-child{color:var(--ink);font-weight:700}
+    .dt .gap{color:var(--red);font-weight:500}
+
+    /* player cards */
+    .pcard{display:flex;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:12px;box-shadow:var(--sh);transition:transform .18s,box-shadow .18s}
+    .pcard:hover{transform:translateY(-2px);box-shadow:var(--sh-hover)}
+    .pcard .ic{width:44px;height:44px;border-radius:12px;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:18px}
+    .pcard h3{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:6px}
+    .pcard p{font-size:13.5px;color:var(--ink2);line-height:1.7}
+    .pcard p b{color:var(--ink);font-weight:600}
+
+    /* map */
+    .mapbox{margin:8px 0 10px}
+    .mcap{font-size:11.5px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--ink3);text-align:center}
+    .mcap.top{color:var(--green-d);margin-bottom:8px}
+    .mcap.bot{margin-top:8px}
+    .mrow{display:flex;align-items:stretch;gap:10px}
+    .mcap.side{display:flex;align-items:center;text-align:center;width:66px;flex:none;line-height:1.35}
+    .chart{position:relative;flex:1;height:400px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:14.28% 12.5%}
+    @media(max-width:560px){.chart{height:330px}}
+    .ax-x{position:absolute;left:0;right:0;top:50%;height:2px;background:#dbe4ee}
+    .ax-y{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#dbe4ee}
+    .ws{position:absolute;width:47%;height:52%;left:50%;top:3%;border-radius:16px;background:var(--green-soft);border:1.5px dashed var(--green);opacity:.9}
+    .ws-l{position:absolute;left:74%;top:23%;transform:translate(-50%,-50%);text-align:center;width:142px}
+    .ws-l .t{font-size:15px;font-weight:800;color:var(--green-d);line-height:1.15}
+    .ws-l .s{font-size:11px;font-weight:600;color:var(--ink3);margin-top:4px}
+    .node{position:absolute;transform:translate(-50%,-50%);text-align:center;width:98px}
+    .node .d{width:14px;height:14px;border-radius:50%;margin:0 auto 6px;border:3px solid #fff;box-shadow:0 2px 8px rgba(15,27,45,.18)}
+    .node .nm{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.2}
+    .node .nm span{display:block;font-weight:500;color:var(--ink3);font-size:10.5px;margin-top:2px}
+    .mnote{font-size:11.5px;color:var(--ink3);margin:10px 0 22px;text-align:center}
+
+    /* persona */
+    .persona{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:8px 24px;margin:8px 0 22px;box-shadow:var(--sh)}
+    .prow{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+    .prow:last-child{border-bottom:none}
+    .pk{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--green-d);width:120px;flex:none;padding-top:2px}
+    .pv{font-size:14px;color:var(--ink2);line-height:1.6}
+    .pv b{color:var(--ink);font-weight:600}
+    .jt{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:4px 0 22px}
+    @media(max-width:560px){.jt{grid-template-columns:1fr}}
+    .jc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--sh)}
+    .jc .t{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--green-d);margin-bottom:8px}
+    .jc p{font-size:13px;color:var(--ink2);line-height:1.6}
+
+    /* positioning statement */
+    .pos{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:var(--r-lg);padding:26px 28px;margin:8px 0 26px;box-shadow:var(--sh)}
+    .pos .lbl{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--green-d);margin-bottom:14px}
+    .pos p{font-size:19px;line-height:1.6;color:var(--ink);font-weight:500}
+    .pos p span{color:var(--green-d);font-weight:700}
+
+    /* messaging house */
+    .mh{margin:8px 0 8px}
+    .mh-roof{background:linear-gradient(135deg,var(--green),#22c79e);border-radius:var(--r-lg);padding:22px;text-align:center;margin-bottom:12px;box-shadow:0 8px 24px rgba(6,180,138,.28)}
+    .mh-roof .l{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:7px}
+    .mh-roof .m{font-size:25px;color:#fff;font-weight:800}
+    .mh-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media(max-width:560px){.mh-cols{grid-template-columns:1fr}}
+    .mh-col{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--green);border-radius:var(--r);padding:16px;box-shadow:var(--sh)}
+    .mh-col h4{font-size:14.5px;color:var(--ink);margin-bottom:8px;font-weight:800}
+    .mh-col p{font-size:12.5px;color:var(--ink2);line-height:1.6}
+    .mh-base{background:var(--green-soft);border-radius:var(--r);padding:14px 16px;margin-top:12px;text-align:center;font-size:12.5px;color:var(--green-d)}
+    .mh-base b{font-weight:700}
+    .mh-cap{font-size:11.5px;color:var(--ink3);margin:8px 0 24px;text-align:center}
+
+    /* gtm */
+    .move{display:flex;gap:16px;margin-bottom:20px}
+    .move .num{font-size:15px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--green),#22c79e);width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex:none;box-shadow:0 4px 12px rgba(6,180,138,.3)}
+    .move h4{font-size:15px;color:var(--ink);font-weight:800;margin-bottom:5px}
+    .move p{font-size:13.5px;color:var(--ink2);line-height:1.65}
+    .move p b{color:var(--ink);font-weight:600}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 8px}
+    @media(max-width:560px){.split{grid-template-columns:1fr}}
+    .mb{border-radius:var(--r);padding:18px 20px;box-shadow:var(--sh)}
+    .mb.north{background:var(--green-soft);border:1px solid #bfe9dc}
+    .mb.anti{background:var(--red-soft);border:1px solid #f7c9c7}
+    .mb .t{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
+    .mb.north .t{color:var(--green-d)} .mb.anti .t{color:var(--red)}
+    .mb p{font-size:13px;color:var(--ink2);line-height:1.6}
+    .mb p b{color:var(--ink);font-weight:600}
+
+    /* reflection */
+    .refl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;margin-bottom:12px;box-shadow:var(--sh)}
+    .refl h4{font-size:14.5px;color:var(--ink);font-weight:800;margin-bottom:6px}
+    .refl p{font-size:13px;color:var(--ink2);line-height:1.7}
+
+    .backlink{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--green-d);text-decoration:none;margin-bottom:24px}
+    .backlink:hover{gap:9px;transition:gap .15s}
+    footer{border-top:1px solid var(--line);padding:32px 0 48px}
+    footer .f{font-size:12.5px;color:var(--ink3);font-weight:500;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <span class="brand"><span class="logo"></span>Akash Jain</span>
+    <div class="nav-links">
+      <a href="#market">Market</a>
+      <a href="#players">Players</a>
+      <a href="#map">Map</a>
+      <a href="#opportunity">Opportunity</a>
+      <a href="#challenger">Challenger</a>
+      <a href="#gtm">Go-to-Market</a>
+      <a href="#notes">Notes</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="hero-chart" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#06b48a" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#06b48a" stop-opacity="0"/>
+    </linearGradient></defs>
+    <path d="M0,330 C90,300 150,320 230,250 C300,190 340,210 420,130 C480,72 540,96 600,40" fill="none" stroke="#06b48a" stroke-width="2.5" stroke-opacity="0.5"/>
+    <path d="M0,330 C90,300 150,320 230,250 C300,190 340,210 420,130 C480,72 540,96 600,40 L600,400 L0,400 Z" fill="url(#g)"/>
+  </svg>
+  <div class="wrap hero-in">
+    <a href="index.html" class="backlink">← All projects</a>
+    <div class="htag">PMM Portfolio — Project 02 · <b>Competitive Strategy</b></div>
+    <h1 class="ht">India's investing apps: <em>a positioning teardown</em></h1>
+    <p class="hlede">How Zerodha, Groww, Angel One, and INDmoney stake out four different buyers — where the white space sits, and the challenger I'd build to take it.</p>
+    <div class="apps">
+      <div class="app"><div class="app-ic" style="background:var(--grw)">G</div><div class="an">Groww <span class="t t-up">▲</span></div><div class="ap">simplicity</div></div>
+      <div class="app"><div class="app-ic" style="background:var(--zer)">Z</div><div class="an">Zerodha <span class="t t-dn">▼</span></div><div class="ap">trust &amp; craft</div></div>
+      <div class="app"><div class="app-ic" style="background:var(--ang)">A</div><div class="an">Angel One <span class="t t-dn">▼</span></div><div class="ap">full-service, discount</div></div>
+      <div class="app"><div class="app-ic" style="background:var(--ind)">I</div><div class="an">INDmoney <span class="t t-up">▲</span></div><div class="ap">the super-app</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- MARKET -->
+  <section id="market">
+    <div class="kicker"><span class="n num">01</span> The market</div>
+    <h2 class="sh">A booming market with an uncomfortable secret</h2>
+    <p class="body">India's retail investing boom is real: demat accounts have multiplied past 19 crore since the pandemic, and roughly <b>4.4 crore people trade actively</b> on the NSE. But the growth funnelled into a handful of apps fighting for the same buyer — mostly on the same two things: <b>price</b> (₹20 flat, zero delivery) and <b>features</b>. Price and features aren't positioning. That sameness is the opening.</p>
+    <div class="stats">
+      <div class="stat"><div class="l">Active NSE clients</div><div class="v num">~4.4<span style="font-size:20px;font-weight:700"> cr</span></div><div class="s">Down ~10% from the Jan-2025 peak after SEBI's F&amp;O curbs</div><span class="chip r">▼ post-regulation</span></div>
+      <div class="stat"><div class="l">Market leader</div><div class="v" style="font-size:32px">Groww</div><div class="s">~1.3 cr active clients · ~29% share</div><span class="chip g">▲ #1 &amp; gaining</span></div>
+      <div class="stat warn"><div class="l">F&amp;O traders who lost money</div><div class="v num">91%</div><div class="s">SEBI, FY25 · ₹1.05 lakh crore in net losses</div></div>
+    </div>
+    <div class="call">
+      <b>The secret nobody advertises:</b> most brokers earn the most when you <em>trade</em> — and above all in F&amp;O, where SEBI found <span class="neg">91% of individual traders lost money</span> in FY25 (a combined ₹1.05 lakh crore; ₹1.8 lakh crore over the prior three years). The incumbents' incentive is your <em>activity</em>. Your interest is your <em>outcome</em>. Hold that gap — it's where the white space is.
+    </div>
+    <p class="body">This teardown maps how the four biggest consumer apps position themselves, finds the gap none of them can occupy, and designs a challenger built to own it.</p>
+    <p class="note">Built from public sources — NSE &amp; SEBI disclosures, company sites, market reporting (data mid-2026, and it moves). The challenger in the final sections is a strategic concept, not a real company.</p>
+  </section>
+
+  <!-- PLAYERS -->
+  <section id="players">
+    <div class="kicker"><span class="n num">02</span> The players</div>
+    <h2 class="sh">Four apps, four genuinely different positions</h2>
+    <p class="body">This market is a positioning study, not a feature race — because the four leaders each own a different buyer. Here's how each one wins, and the gap each one leaves behind.</p>
+    <table class="dt">
+      <thead><tr><th>App</th><th>Target buyer</th><th>Positioning</th><th>The gap it leaves</th></tr></thead>
+      <tbody>
+        <tr><td>Zerodha</td><td>Self-directed traders &amp; serious investors</td><td>Trust &amp; craft — bootstrapped, no-ads, trader-grade</td><td class="gap">Intimidating for beginners; nothing guides you to outcomes</td></tr>
+        <tr><td>Groww</td><td>First-time investors, Gen Z, Tier 2/3</td><td>Simplicity — the friendliest way to start</td><td class="gap">Little depth once you outgrow "simple"; earns on activity</td></tr>
+        <tr><td>Angel One</td><td>Mass-market investors who want help</td><td>Full-service at discount — research, advisory &amp; AI at ₹20</td><td class="gap">Legacy perception; breadth over a single sharp promise</td></tr>
+        <tr><td>INDmoney</td><td>Multi-asset trackers &amp; US-stock investors</td><td>The SuperMoneyApp — all your wealth in one view</td><td class="gap">Tracking isn't guidance; still a transaction platform</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pcard"><div class="ic" style="background:var(--zer)">Z</div><div><h3>Zerodha — trust as a moat</h3><p>Bootstrapped, <b>zero ad spend</b>, ~1.6 crore users and ₹6 lakh crore in assets, with the highest net worth in the category. It grew on Varsity (free, plain-language education) and word of mouth — nearly a third of customers arrive via referral. The position: the honest, trader-grade platform that treats you like an adult. The gap: it's built for people who already know what they're doing, and deliberately won't hold your hand.</p></div></div>
+    <div class="pcard"><div class="ic" style="background:var(--grw)">G</div><div><h3>Groww — simplicity as a wedge</h3><p>Groww went after the <b>95% of Indians who hadn't invested</b>, not the 5% already on Zerodha — stripping investing down to something a first-timer could do in minutes. It worked: now the largest broker by active clients (~1.3 crore), powered by a content-and-creator engine and campaigns like "Life mein Groww karo." The gap: simplicity has a ceiling — little for the graduating investor, and the model still monetises trading.</p></div></div>
+    <div class="pcard"><div class="ic" style="background:var(--ang)">A</div><div><h3>Angel One — the incumbent that reinvented itself</h3><p>A 1996 full-service broking house that <b>rebranded in 2021</b> — dropping "Broking" to shed the old image — and pivoted to a Gen-Z super app: research, relationship managers, and AI-led picks (ARQ) at a flat ₹20. A genuinely rare "full-service at discount prices" combination. The gap: a broad super-app promise is harder to make sharp, and it's still shaking a heritage-broker perception.</p></div></div>
+    <div class="pcard"><div class="ic" style="background:var(--ind)">I</div><div><h3>INDmoney — breadth as the hook</h3><p>Positioned as the <b>"SuperMoneyApp"</b>: one dashboard for your entire net worth — Indian &amp; US stocks, mutual funds, EPF, NPS, even credit cards — with US investing from ₹100 and ~1 crore users. The gap: <em>seeing</em> your money isn't the same as <em>growing</em> it well, and beneath the tracker it still earns on transactions.</p></div></div>
+  </section>
+
+  <!-- MAP -->
+  <section id="map">
+    <div class="kicker"><span class="n num">03</span> Positioning map</div>
+    <h2 class="sh">They all crowd the same half of the map</h2>
+    <p class="body">Plot the four on two axes — how sophisticated the user is (left→right), and whether the app optimises for <b>transactions</b> or for your <b>outcome</b> (bottom→top) — and the pattern is impossible to miss: everyone lives in the trade-first half, because that's how brokers make money.</p>
+    <div class="mapbox">
+      <div class="mcap top">↑ optimises for your long-term outcome</div>
+      <div class="mrow">
+        <div class="mcap side">beginner-simple</div>
+        <div class="chart">
+          <div class="ax-x"></div><div class="ax-y"></div>
+          <div class="ws"></div>
+          <div class="ws-l"><div class="t">The white space</div><div class="s">outcome-first · for graduated investors</div></div>
+          <div class="node" style="left:21%;top:73%"><div class="d" style="background:var(--grw)"></div><div class="nm">Groww<span>simple · beginner</span></div></div>
+          <div class="node" style="left:85%;top:81%"><div class="d" style="background:var(--zer)"></div><div class="nm">Zerodha<span>trader-grade</span></div></div>
+          <div class="node" style="left:63%;top:69%"><div class="d" style="background:var(--ang)"></div><div class="nm">Angel One<span>full-service</span></div></div>
+          <div class="node" style="left:33%;top:43%"><div class="d" style="background:var(--ind)"></div><div class="nm">INDmoney<span>tracks wealth</span></div></div>
+        </div>
+        <div class="mcap side">pro / trader</div>
+      </div>
+      <div class="mcap bot">↓ optimises for transactions &amp; trading activity</div>
+    </div>
+    <p class="mnote">Positioning is approximate — based on each app's dominant promise and business model.</p>
+    <p class="body">The entire <b>outcome-first</b> half is thin. INDmoney edges up — it lets you <em>track</em> outcomes — but it still sells transactions beneath the dashboard. Nobody occupies the top-right: an app that actively optimises for the investor's long-term wealth, for people who've outgrown beginner tools but don't want a trading terminal. <span class="accent">That's the gap.</span></p>
+  </section>
+
+  <!-- OPPORTUNITY -->
+  <section id="opportunity">
+    <div class="kicker"><span class="n num">04</span> The opportunity</div>
+    <h2 class="sh">The graduated investor nobody built for</h2>
+    <p class="body">A large, fast-growing segment sits in that white space: people who <b>started on Groww or Zerodha</b>, invest regularly, and earn well — and who've realised the trading game isn't building their wealth. SEBI's loss data was the wake-up call their own portfolios had been hinting at. They want a wealth <em>outcome</em>, and a partner whose incentives actually line up with theirs.</p>
+    <div class="persona">
+      <div class="prow"><div class="pk">Who</div><div class="pv"><b>The graduated wealth-builder, 26–40.</b> Salaried or self-employed, urban Tier 1/2, earning well, 2–5 years into investing.</div></div>
+      <div class="prow"><div class="pk">Invests now</div><div class="pv">SIPs plus some direct stocks across two or three apps. Tried F&amp;O or watched friends lose at it. Quietly suspicious of "tips" and influencer trades.</div></div>
+      <div class="prow"><div class="pk">Wants</div><div class="pv">To build real long-term wealth toward goals — retirement, a home, financial independence — without babysitting a portfolio or gambling it away.</div></div>
+      <div class="prow"><div class="pk">Blocked by</div><div class="pv">No app is clearly <em>on their side</em>: the "free" ones profit when they trade, and paid advice usually hides commissions.</div></div>
+    </div>
+    <div class="jt">
+      <div class="jc"><div class="t">Functional</div><p>Grow my wealth across goals without micromanaging it — or losing it in the derivatives casino.</p></div>
+      <div class="jc"><div class="t">Emotional</div><p>Feel sure someone's genuinely on my side, not nudging me to trade so they earn.</p></div>
+      <div class="jc"><div class="t">Social / identity</div><p>Be the friend who builds real wealth quietly — not the one chasing option tips in the group chat.</p></div>
+    </div>
+    <div class="call pos">
+      <b>The wedge:</b> every incumbent ultimately earns from your <em>activity</em> — per-trade brokerage, and above all F&amp;O, where 91% of retail loses. The one position none of them can occupy while monetising trades is being <span class="accent">structurally, provably on the investor's side</span>. You can't out-simple Groww or out-trade Zerodha — but you can own the outcome.
+    </div>
+  </section>
+
+  <!-- CHALLENGER -->
+  <section id="challenger">
+    <div class="kicker"><span class="n num">05</span> The challenger</div>
+    <h2 class="sh">Arth — the app that only wins when you do</h2>
+    <p class="note">"Arth" (अर्थ — wealth, and meaning) is a challenger concept created for this teardown to demonstrate the positioning-to-GTM craft — not a real or proposed company.</p>
+    <div class="pos">
+      <div class="lbl">Positioning statement</div>
+      <p>For <span>India's serious long-term wealth-builders who've outgrown beginner apps but reject the trading casino</span>, Arth is the <span>wealth app whose only job is your long-term outcome</span> — unlike <span>brokers that profit when you trade (and lose)</span> — because <span>Arth earns from your wealth growing, not from your churn</span>.</p>
+    </div>
+    <div class="mh">
+      <div class="mh-roof"><div class="l">Core message</div><div class="m">We only win when you do.</div></div>
+      <div class="mh-cols">
+        <div class="mh-col"><h4>Aligned by design</h4><p>A flat fee tied to your growing wealth — zero per-trade incentive, no F&amp;O push. Our economics only work if yours do.</p></div>
+        <div class="mh-col"><h4>Outcomes, not orders</h4><p>Goal-based portfolios (retirement, home, FIRE), auto-rebalanced, under one true net-worth view. Framed around your goals, not a watchlist.</p></div>
+        <div class="mh-col"><h4>Guidance you can trust</h4><p>Commission-free, plain-language advice that keeps you invested through volatility — the opposite of tip culture.</p></div>
+      </div>
+      <div class="mh-base"><b>Foundation (reasons to believe):</b> SEBI's own F&amp;O loss data · a fee model with no trading conflict · direct zero-commission funds &amp; low-cost index exposure · SEBI-registered advice.</div>
+    </div>
+    <p class="mh-cap">Roof = the one line Arth leads with · pillars = the three proof themes · foundation = the evidence that makes them credible.</p>
+    <h2 class="sh" style="font-size:20px;margin-top:28px">Claims → objection-handling</h2>
+    <p class="body">The buyer's guard is up — they've heard every pitch. Each objection has to be met head-on:</p>
+    <table class="dt">
+      <thead><tr><th>The buyer's objection</th><th>The claim &amp; proof that answers it</th></tr></thead>
+      <tbody>
+        <tr><td>"Not another investing app."</td><td>No trading terminal, no F&amp;O, no watchlist dopamine — <b>a wealth outcome with aligned incentives</b>. A different job entirely.</td></tr>
+        <tr><td>"Why pay when Groww &amp; Zerodha are free?"</td><td>"Free" brokers earn when you trade — often into the 91% who lose. <b>A flat fee with zero trade incentive</b> costs less than the losses it prevents.</td></tr>
+        <tr><td>"Can I actually trust the advice?"</td><td><b>Commission-free and SEBI-registered</b> — Arth earns nothing from what it recommends, so there's no product being pushed.</td></tr>
+        <tr><td>"I still want to buy the odd stock."</td><td>You can, at cost — <b>but the default is your goal</b>, not the casino. Freedom without the nudge to churn.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- GTM -->
+  <section id="gtm">
+    <div class="kicker"><span class="n num">06</span> Go-to-market</div>
+    <h2 class="sh">How Arth would land</h2>
+    <p class="body">A challenger doesn't launch at everyone. Arth starts where the pain is loudest and the message needs no explaining, then earns the right to widen.</p>
+    <div class="move"><div class="num num">1</div><div><h4>Wedge audience: the burned and the believers</h4><p>Start with two overlapping groups: investors who've <b>lost money in F&amp;O or watched friends lose</b>, and the FIRE / personal-finance communities (r/IndiaInvestments, long-term-investing creators) who already believe in the thesis. Both are primed to hear "we only win when you do" — no education needed.</p></div></div>
+    <div class="move"><div class="num num">2</div><div><h4>Channel &amp; narrative: credibility over hype</h4><p>The anti-thesis to tip culture and "get rich" performance ads. Lead with <b>SEBI's own loss data</b> and a "Wealth, not trades" manifesto; partner with fee-only advisors and the honest end of finance-creator India. Distribution mirrors the positioning — you can't buy trust with the same ads that sell the casino.</p></div></div>
+    <div class="move"><div class="num num">3</div><div><h4>The model is the proof</h4><p>A <b>flat subscription / advisory fee</b>, zero F&amp;O, direct zero-commission funds and low-cost index exposure. The fee model isn't a pricing detail — it <em>is</em> the positioning made real, and the one thing incumbents can't copy without breaking their own trading-revenue economics.</p></div></div>
+    <div class="move"><div class="num num">4</div><div><h4>Land &amp; expand</h4><p>Land on <b>goal-based investing + a true net-worth view</b>. Expand into holistic planning — tax, insurance, retirement — becoming the trusted money partner the buyer never had. Depth the graduated investor wanted and Groww never offered.</p></div></div>
+    <div class="split">
+      <div class="mb north"><div class="t">▲ North-star metric</div><p><b>Wealth grown &amp; retained per cohort</b> (AUM growth, multi-year retention) — not MAU or trades. Activation = first goal set + first SIP.</p></div>
+      <div class="mb anti"><div class="t">▼ The deliberate anti-metric</div><p><b>Trading frequency</b> — the one number Arth refuses to maximise. Leaving that revenue on the table is the proof the positioning isn't just a slogan.</p></div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section id="notes">
+    <div class="kicker"><span class="n num">07</span> Reflection &amp; notes</div>
+    <h2 class="sh">What this teardown shows</h2>
+    <div class="refl"><h4>Positioning is a choice about who you're <em>not</em> for</h4><p>Every winner here owns its buyer by giving up the others. Groww ceded traders to own beginners; Zerodha ceded beginners to own the serious. The clarity comes from the sacrifice.</p></div>
+    <div class="refl"><h4>Price and features aren't positioning</h4><p>The whole market sits at ₹20 flat with near-identical feature lists. The apps that broke out did it on a point of view — trust, simplicity, breadth — not a cheaper trade.</p></div>
+    <div class="refl"><h4>The sharpest positioning rides on an incentive rivals can't copy</h4><p>Zerodha's no-ads model and Arth's aligned-fee model are both positions competitors can't easily follow without breaking their own economics. A moat you can't be copied out of beats a message anyone can echo.</p></div>
+    <div class="refl"><h4>White space usually hides where the money isn't — yet</h4><p>Nobody occupies "outcome-first" precisely because it means giving up trading revenue. That's exactly what makes it ownable: the gap is guarded by the incumbents' own P&amp;L.</p></div>
+    <div class="call" style="margin-top:22px">
+      <b>Honest notes &amp; what I'd validate next.</b> This is an outside-in analysis from public sources; market data is mid-2026 and will shift. Arth is a strategic concept to demonstrate the craft, not a validated business. Before betting on it I'd want to: <b>size</b> the graduated-investor segment; <b>test willingness to pay</b> a subscription against "free" broking; and <b>pressure-test the unit economics</b> of an aligned-fee model at scale — the model is the whole thesis, so it's where the risk lives.
+    </div>
+  </section>
+
+  <footer>
+    <div class="f"><span>Akash Jain — PMM Portfolio</span><span>Project 02 · Investing-Apps Positioning Teardown</span></div>
+  </footer>
+</div>
+
+<script>
+  const links=[...document.querySelectorAll('.nav-links a')];
+  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));const a=map.get(e.target.id);if(a)a.classList.add('on');}});
+  },{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section[id]').forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
