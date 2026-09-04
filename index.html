@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akash Jain · Product Marketing Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink:#191634; --ink2:#56536f; --ink3:#9995b4;
+      --bg:#f9f8fe; --surface:#ffffff; --line:#eae7f5;
+      --indigo:#6d5cf5; --indigo-d:#5646d8; --indigo-soft:#eeebff;
+      --coral:#fb6f61; --coral-d:#e8543f; --coral-soft:#ffece9;
+      --teal:#0fb5a6; --teal-soft:#e2f7f4;
+      --radius:8px; --radius-lg:16px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.7}
+    .wrap{max-width:1000px;margin:0 auto;padding:0 40px}
+    @media(max-width:600px){.wrap{padding:0 22px}}
+
+    /* header */
+    .hero{position:relative;overflow:hidden}
+    .hero-wash{position:absolute;inset:0;pointer-events:none;
+      background:radial-gradient(560px 380px at 88% -8%,rgba(109,92,245,.16),transparent 70%),
+                 radial-gradient(420px 300px at 12% 6%,rgba(251,111,97,.12),transparent 68%)}
+    header{position:relative;padding:70px 0 40px}
+    .eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--indigo-d);background:var(--indigo-soft);padding:6px 13px;border-radius:20px;margin-bottom:22px}
+    h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,7.5vw,74px);line-height:1.0;color:var(--ink);margin-bottom:22px}
+    .intro{font-size:17px;color:var(--ink2);font-weight:300;max-width:660px;line-height:1.7}
+    .intro b{font-weight:600}
+    .intro .hi-i{color:var(--indigo-d)} .intro .hi-c{color:var(--coral-d)}
+    .contact{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:30px;font-size:13.5px}
+    .contact a{color:var(--ink2);text-decoration:none;display:inline-flex;align-items:center;gap:7px;transition:color .15s}
+    .contact a:hover{color:var(--indigo-d)}
+    .contact svg{width:14px;height:14px;stroke:var(--ink3);fill:none;stroke-width:1.7}
+
+    .rule{height:1px;background:var(--line);margin:8px 0 44px}
+
+    /* projects */
+    .projects-eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);margin-bottom:22px}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    @media(max-width:680px){.grid{grid-template-columns:1fr}}
+    .card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
+      padding:28px 26px 24px;text-decoration:none;color:inherit;display:flex;flex-direction:column;overflow:hidden;
+      box-shadow:0 1px 3px rgba(25,22,52,.03),0 12px 28px rgba(25,22,52,.05);
+      transition:transform .16s ease,box-shadow .16s ease}
+    .card:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--pc)}
+    .card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(25,22,52,.07),0 26px 56px rgba(25,22,52,.12)}
+    .card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+    .card-num{font-family:'DM Serif Display',serif;font-size:17px;color:var(--pc)}
+    .card-arrow{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;color:var(--ink3);transition:all .16s;font-size:13px}
+    .card:hover .card-arrow{border-color:var(--pc);color:var(--pc);transform:translate(2px,-2px)}
+    .card-title{font-family:'DM Serif Display',serif;font-size:23px;line-height:1.14;color:var(--ink);margin-bottom:11px}
+    .card-desc{font-size:13.5px;color:var(--ink2);line-height:1.65;margin-bottom:18px;flex:1}
+    .pills{display:flex;flex-wrap:wrap;gap:6px}
+    .pill{font-size:11px;font-weight:500;padding:4px 11px;background:var(--pc-soft);color:var(--pc-d);border-radius:20px}
+
+    /* about panel */
+    .about{position:relative;overflow:hidden;background:linear-gradient(135deg,#6d5cf5,#8f6bf8 60%,#a86cf3);
+      color:#fff;border-radius:var(--radius-lg);padding:36px;margin:44px 0 0;
+      display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+    .about-glow{position:absolute;right:-90px;bottom:-120px;width:340px;height:340px;border-radius:50%;
+      background:radial-gradient(circle,rgba(255,255,255,.16),transparent 66%)}
+    .about-inner{position:relative;max-width:600px}
+    .about-eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:12px}
+    .about-text{font-size:14.5px;color:rgba(255,255,255,.9);line-height:1.7;font-weight:300}
+    .about-text b{color:#fff;font-weight:600}
+    .btn{position:relative;background:#fff;color:var(--indigo-d);text-decoration:none;font-size:13.5px;font-weight:600;
+      padding:13px 24px;border-radius:var(--radius);white-space:nowrap;transition:transform .15s,box-shadow .15s;
+      display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,.14)}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.2)}
+
+    footer{display:flex;justify-content:space-between;align-items:center;padding:40px 0 48px;margin-top:40px;border-top:1px solid var(--line);font-size:12px;color:var(--ink3)}
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-wash"></div>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">PMM Portfolio</div>
+      <h1>Akash Jain</h1>
+      <p class="intro">Product marketer with <b class="hi-i">2 years</b> owning go-to-market end-to-end: positioning, messaging, and full-funnel growth across two 0→1 builds — turning <b class="hi-c">buyer research</b> into the story that sells.</p>
+      <div class="contact">
+        <a href="mailto:aakashjain.way@gmail.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>aakashjain.way@gmail.com</a>
+        <a href="https://www.linkedin.com/in/akash-jain7/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 014 0v4"/></svg>linkedin.com/in/akash-jain7</a>
+        <a href="https://www.notion.so/My-PM-Projects-324f1daf00e780ddaa85e938b2f766b7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z"/><path d="M9 9h6M9 13h6"/></svg>Notion workspace</a>
+        <a href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M13 3v5h5"/></svg>Résumé</a>
+      </div>
+    </header>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="rule"></div>
+
+  <div class="projects-eyebrow">Projects · positioning &amp; go-to-market across D2C, fintech &amp; consumer</div>
+
+  <div class="grid">
+
+    <a class="card" href="orthians.html" style="--pc:var(--coral);--pc-d:var(--coral-d);--pc-soft:var(--coral-soft)">
+      <div class="card-top">
+        <span class="card-num">01</span>
+        <span class="card-arrow">→</span>
+      </div>
+      <div class="card-title">Orthians: Positioning a Challenger</div>
+      <div class="card-desc">Positioned a D2C ergonomics brand at the market leader's price with a better product — then repositioned around trust when ratings and returns, not quality, capped growth. Buyer research, pricing, GTM, and a durability claim rivals couldn't match. Returns −27%, acquisition restarted.</div>
+      <div class="pills">
+        <span class="pill">Positioning</span>
+        <span class="pill">Pricing</span>
+        <span class="pill">GTM</span>
+        <span class="pill">Trust-Led Growth</span>
+      </div>
+    </a>
+
+    <a class="card" href="investing-apps.html" style="--pc:var(--indigo);--pc-d:var(--indigo-d);--pc-soft:var(--indigo-soft)">
+      <div class="card-top">
+        <span class="card-num">02</span>
+        <span class="card-arrow">→</span>
+      </div>
+      <div class="card-title">India's Investing Apps: A Positioning Teardown</div>
+      <div class="card-desc">How Zerodha, Groww, Angel One, and INDmoney stake out four different buyers — with a positioning map, the white space they all leave, and a full challenger play: positioning statement, messaging house, and go-to-market. A public look at the competitive-strategy work I do under NDA.</div>
+      <div class="pills">
+        <span class="pill">Competitive Strategy</span>
+        <span class="pill">Positioning Map</span>
+        <span class="pill">Messaging House</span>
+        <span class="pill">GTM</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="about">
+    <div class="about-glow"></div>
+    <div class="about-inner">
+      <div class="about-eyebrow">About this portfolio</div>
+      <div class="about-text">Built to demonstrate product-marketing craft end-to-end: <b>competitive positioning, messaging, pricing, and go-to-market</b> — from a founder-led 0→1 brand to competitive teardowns. Every project runs the full arc: the buyer, the position, the message, and the metrics that move.</div>
+    </div>
+    <a class="btn" href="https://www.linkedin.com/in/akash-jain7/" target="_blank" rel="noopener">Connect on LinkedIn →</a>
+  </div>
+
+  <footer>
+    <span>Akash Jain</span>
+    <span>PMM Portfolio</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
